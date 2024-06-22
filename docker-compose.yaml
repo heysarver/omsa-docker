@@ -1,0 +1,25 @@
+version: '3'
+services:
+  omsa:
+    image: local/omsa:latest
+    entrypoint: /bin/bash
+    command: ["-c", "tail -f /dev/null"]
+    privileged: true
+    ports:
+      - "1311:1311"
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /dev:/dev
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+
+# services:
+#   omsa:
+#     image: local/omsa:latest
+#     privileged: true
+#     ports:
+#       - "1311:1311"
+#     volumes:
+#       - /lib/modules:/lib/modules:ro
+#       - /usr/src:/usr/src:ro
+#       - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
